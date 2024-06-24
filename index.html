@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>To Do List</h1>
+            <input type="text" placeholder="Write here..." name="input" id="input">
+            <button id="add">ADD</button>
+            <ul id="ul"></ul>
+
+        </div>
+    </div>
+    <script>
+        const input = document.getElementById('input');
+        const ul = document.getElementById('ul');
+        const add = document.getElementById('add');
+
+        add.addEventListener('click',() =>{
+            addListItem();
+        });
+
+        function addListItem(){
+            if (input.value.trim()){
+                const li = document.createElement('li');
+                
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.classList.add('checkbox');
+                
+                checkbox.addEventListener('change',(event) =>{
+                    
+                        if (event.target.checked){
+                            textSpan.style.textDecoration = 'line-through';
+
+                        }
+                        else{
+                            textSpan.style.textDecoration = 'none';
+                        }
+                    
+                });
+                const textSpan = document.createElement('span');
+                textSpan.textContent = input.value.trim();
+                
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'X';
+                deleteButton.classList.add('delete');
+                deleteButton.addEventListener('click',() =>{
+                    li.remove();
+                });
+                li.appendChild(checkbox);
+                li.appendChild(textSpan);
+                li.appendChild(deleteButton);
+                ul.appendChild(li);
+
+
+                
+
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
